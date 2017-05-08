@@ -1,13 +1,12 @@
-//webpack.config.js
-if(process.env.NODE_ENV === 'development') {
-  var loaders = ['react-hot', 'babel']
+// webpack.config.js
+if(process.env.NODE_ENV === 'development'){
+  var loaders = ['react-hot','babel']
 } else {
-  var loaders = [babel]
+  var loaders = ['babel']
 }
-
 module.exports = {
   devtool: 'eval',
-  entry: './app-client.js'
+  entry: './app-client.js',
   output: {
     path: __dirname + '/public/dist',
     filename: 'bundle.js',
@@ -16,8 +15,8 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      loader: Loaders,
-      exclude: /node_module/
+      loaders: loaders,
+      exclude: /node_modules/
     }]
   }
 };
