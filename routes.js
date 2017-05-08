@@ -1,88 +1,27 @@
-import React, {Component} from 'react';
-import {Route, IndexRoute, Link} from 'react-router';
+// routes.js
+import React from 'react'
+import { Route, IndexRoute } from 'react-router'
 
-class App extends Component {
-  ComponentDidMount() {
-    document.bodu.className = ''
-  }
-  render() {
-    return (
-      <div>
-        <h1>React Universal Blog</h1>
-          <nav>
-            <ul>
-              <li><link to = "/">Home</link></li>
-              <li><link to = "/about">About</link></li>
-              <li><link to = "work">Work</link></li>
-              <li></li>
-            </ul>
-          </nav>
-        { this.props.children }
-      </div>
-    )
-  }
-}
+// Store
+import AppStore from './stores/AppStore'
 
-//Pages
-class Home extends Component {
-  render() {
-    return (
-      <div>
-        <h2>Home</h2>
-        <div>Some home page content</div>
-      </div>
-    )
-  }
-}
+// Main component
+import App from './components/App'
 
-class About extends Component {
-  render() {
-    return (
-      <div>
-        <h2>about</h2>
-        <div>Some about page content</div>
-      </div>
-    )
-  }
-}
-
-class Work extends Component {
-  render(){
-    return (
-      <div>
-        <h2>Work</h2>
-        <div>Some work page content</div>
-      </div>
-    )
-  }
-}
-class Contact extends Component {
-  render(){
-    return (
-      <div>
-        <h2>Contact</h2>
-        <div>Some contact page content</div>
-      </div>
-    )
-  }
-}
-class NoMatch extends Component {
-  render(){
-    return (
-      <div>
-        <h2>NoMatch</h2>
-        <div>404 error</div>
-      </div>
-    )
-  }
-}
+// Pages
+import Blog from './components/Pages/Blog'
+import Default from './components/Pages/Default'
+import Work from './components/Pages/Work'
+import NoMatch from './components/Pages/NoMatch'
 
 export default (
-  <Route path="/" component={App}>
-    <IndexRoute component={Home}/>
-    <Route path="about" component={About}/>
+  <Route path="/" data={AppStore.data} component={App}>
+    <IndexRoute component={Blog}/>
+    <Route path="about" component={Default}/>
+    <Route path="contact" component={Default}/>
     <Route path="work" component={Work}/>
-    <Route path="contact" component={Contact}/>
+    <Route path="/work/:slug" component={Work}/>
+    <Route path="/blog/:slug" component={Blog}/>
     <Route path="*" component={NoMatch}/>
   </Route>
 )
